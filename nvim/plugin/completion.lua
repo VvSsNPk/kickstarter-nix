@@ -60,6 +60,29 @@ cmp.setup {
         complete_with_source('buffer')
       end
     end, { 'i', 'c', 's' }),
+  ['<Tab>'] = cmp.mapping(
+    function(fallback)
+      local col = vim.fn.col('.') -1
+
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif col == 0 or vim.fn.getLine('.'):sub(col,col):match('%s') then
+        fallback()
+      else
+        cmp.complete()
+      end
+    end,
+    {"i","s"}
+  ),
+['<S-Tab>'] = cmp.mapping(
+  function(fallback)
+    if cmp.visible() then
+      cmp.select_prev_item()
+    else
+      fallback()
+    end
+  end,
+  {"i","s"}),
     ['<C-f>'] = cmp.mapping(function(_)
       if cmp.visible() then
         cmp.scroll_docs(4)
