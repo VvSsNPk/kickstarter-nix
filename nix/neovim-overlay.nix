@@ -85,6 +85,7 @@ with final.pkgs.lib; let
     which-key-nvim
     plenary-nvim
     lean-nvim
+    rustaceanvim
   ];
 
   extraPackages = with pkgs; [
